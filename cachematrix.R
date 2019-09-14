@@ -15,8 +15,8 @@ makeCacheMatrix <- function(x = matrix()) { #take the matrix as an input
   invMatrix <- NULL
   
   setMatrix <- function(y) {                #set the value of the Matrix
-       x <<- y    #assign a value to an object in an environment that is different
-       invMatrix <<- NULL
+    x <<- y    #assign a value to an object in an environment that is different
+    invMatrix <<- NULL
   }
   
   getMatrix <- function() x                              #get the value of the Matrix
@@ -40,12 +40,12 @@ makeCacheMatrix <- function(x = matrix()) { #take the matrix as an input
 #           it returns a message  "Getting Cached Invertible Matrix" and the cached object
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  ## Return a matrix that is the inverse of 'x'
   
   invMatrix <- x$getInverse() #get the value from the makeCacheMatrix function
   if(!is.null(invMatrix)) {                         #if inverse matrix !NULL
-      message("Getting Cached Invertible Matrix")    
-      return(invMatrix)                             #return the invertible matrix
+    message("Getting Cached Invertible Matrix")    
+    return(invMatrix)                             #return the invertible matrix
   }
   
   #if value of the invertible matrix = NULL
@@ -55,5 +55,35 @@ cacheSolve <- function(x, ...) {
   x$setInverse(invMatrix)                          
   return(invMatrix)                               
 }
-
-
+#Checking
+#VTest <- matrix(1:9,3,3)
+#> T1$getMatrix()
+#[,1] [,2] [,3]
+#[1,]    1    3    5
+#[2,]    2    4    6
+#> T1$getInverse()
+#NULL
+#> cacheSolve(T1)
+#Show Traceback
+#Rerun with Debug
+#Error in solve.default(MatrixData, ...) : 'a' (2 x 3) must be square 
+#> VTest <- matrix(1:9,3,3)
+#> VTest
+#[,1] [,2] [,3]
+#[1,]    1    4    7
+#[2,]    2    5    8
+#[3,]    3    6    9
+#> makeCacheMatrix(VTest) -> T1
+#> T1$getMatrix()
+#[,1] [,2] [,3]
+#[1,]    1    4    7
+#[2,]    2    5    8
+#[3,]    3    6    9
+#> T1$getInverse()
+#NULL
+#> cacheSolve(T1)
+#Show Traceback
+#Rerun with Debug
+#Error in solve.default(MatrixData, ...) : 
+#  Lapack routine dgesv: system is exactly singular: U[3,3] = 0 
+#
